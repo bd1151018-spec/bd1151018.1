@@ -1,240 +1,1201 @@
 <!DOCTYPE html>
-<html lang="zh-Hant" class="scroll-smooth">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>李文彤 | 個人品牌與簡介</title>
-    <!-- Tailwind CSS CDN -->
+    <title>李安琪 (Jiratha Kaewwong) — Personal Portfolio</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Noto+Sans+TC:wght@300;400;500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        sunshine: '#FF9F43',
-                        coral: '#FF5252',
-                        amberGlow: '#FFBE21',
+                        brand: {
+                            ivory: '#F5F2EB',
+                            sage: '#A7B8A2',
+                            'sage-dark': '#8AA084',
+                            pink: '#E8BFC3',
+                            'pink-light': '#FBF0F2',
+                            white: '#FFFDF8',
+                            charcoal: '#252B29',
+                            cream: '#F8EEDC',
+                            darkbg: '#1C2120',
+                            darkcard: '#272E2C'
+                        }
                     },
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+                        sans: ['DM Sans', 'Noto Sans TC', 'Prompt', 'sans-serif'],
+                        zh: ['Noto Sans TC', 'sans-serif'],
+                        th: ['Prompt', 'sans-serif']
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
                     }
                 }
             }
         }
     </script>
     <style>
+        /* Custom Styles & Animation Helpers */
         body {
-            background-color: #FAFAF9;
-            color: #1C1917;
+            font-family: 'DM Sans', 'Noto Sans TC', 'Prompt', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* 亮麗光暈背景裝飾 */
-        .glow-bg {
-            background: radial-gradient(circle at 50% 20%, rgba(255, 159, 67, 0.25) 0%, rgba(255, 82, 82, 0.1) 45%, rgba(255, 255, 255, 0) 70%);
+        .bg-pattern {
+            background-image: radial-gradient(#A7B8A2 0.75px, transparent 0.75px), radial-gradient(#E8BFC3 0.75px, #F5F2EB 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.4;
         }
 
-        /* 亮麗卡片 */
-        .vibrant-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(254, 215, 170, 0.6);
-            box-shadow: 0 12px 32px -8px rgba(255, 120, 48, 0.12);
+        .dark .bg-pattern {
+            background-image: radial-gradient(#8AA084 0.75px, transparent 0.75px), radial-gradient(#E8BFC3 0.75px, #1C2120 0.75px);
+            opacity: 0.15;
         }
 
-        /* Toast 彈窗動畫 */
-        #toast {
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform: translateY(120%) scale(0.9);
-            opacity: 0;
+        /* Sparkle float keyframes */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(6deg); }
         }
-        #toast.show {
-            transform: translateY(0) scale(1);
-            opacity: 1;
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.04); }
+        }
+
+        .animate-float-slow {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F2EB;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #1C2120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A7B8A2;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8AA084;
+        }
+
+        /* Subtle Cursor Sparkle Trail */
+        .cursor-sparkle {
+            pointer-events: none;
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #E8BFC3;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, opacity 0.4s ease;
+            z-index: 9999;
+        }
+
+        /* Card Soft Shadows */
+        .soft-shadow {
+            box-shadow: 0 10px 30px -10px rgba(167, 184, 162, 0.25);
+        }
+        .dark .soft-shadow {
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
         }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen flex flex-col justify-between relative overflow-x-hidden selection:bg-orange-200 selection:text-orange-900">
+<body class="bg-brand-ivory text-brand-charcoal dark:bg-brand-darkbg dark:text-gray-100 transition-colors duration-300 min-h-screen relative overflow-x-hidden">
 
-    <!-- Ambient Vivid Background Light -->
-    <div class="fixed inset-0 glow-bg pointer-events-none -z-10"></div>
+    <!-- Interactive Cursor Sparkle (Desktop) -->
+    <div id="cursor-dot" class="cursor-sparkle hidden md:block opacity-0"></div>
 
-    <!-- Main Container -->
-    <main class="max-w-2xl mx-auto px-6 py-10 sm:py-16 w-full flex-grow flex flex-col justify-center">
+    <!-- Floating Background Decorative Grid Pattern -->
+    <div class="fixed inset-0 bg-pattern pointer-events-none z-0"></div>
 
-        <!-- 1. HERO PROFILE CARD (簡潔強烈的主區塊) -->
-        <div class="vibrant-card rounded-3xl p-8 sm:p-10 mb-6 text-center relative overflow-hidden">
-            <!-- Top Gradient Accent -->
-            <div class="absolute top-0 inset-x-0 h-2.5 bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500"></div>
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-brand-ivory/80 dark:bg-brand-darkbg/80 border-b border-brand-sage/20 dark:border-gray-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-sage to-brand-pink flex items-center justify-center text-white font-bold text-lg shadow-sm transform group-hover:rotate-12 transition-transform">
+                    李
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight block leading-none">李安琪</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">Jiratha Kaewwong</span>
+                </div>
+            </a>
 
-            <!-- DEDICATED PERSONAL AVATAR SPOT (唯一的個人照片位置) -->
-            <div class="relative w-36 h-36 sm:w-44 sm:h-44 mx-auto mb-6 group cursor-pointer" onclick="triggerPhotoChange()">
-                <div class="absolute -inset-2 bg-gradient-to-tr from-amber-400 via-orange-500 to-rose-500 rounded-full blur-md opacity-80 group-hover:opacity-100 transition duration-300"></div>
-                <div class="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl bg-orange-50">
-                    <img id="user-avatar" 
-                         src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop" 
-                         alt="李文彤的個人照片" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    
-                    <!-- Quick Hover Overlay Hint -->
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white text-xs font-bold gap-1">
-                        <i class="fa-solid fa-camera text-base"></i>
-                        <span>點擊替換照片</span>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 text-sm font-medium">
+                <a href="#home" class="px-3 py-2 rounded-xl hover:bg-brand-sage/15 dark:hover:bg-gray-800 transition" data-i18n="nav_home">首頁</a>
+                <a href="#about" class="px-3 py-2 rounded-xl hover:bg-brand-sage/15 dark:hover:bg-gray-800 transition" data-i18n="nav_about">關於我</a>
+                <a href="#skills" class="px-3 py-2 rounded-xl hover:bg-brand-sage/15 dark:hover:bg-gray-800 transition" data-i18n="nav_skills">技能專長</a>
+                <a href="#interests" class="px-3 py-2 rounded-xl hover:bg-brand-sage/15 dark:hover:bg-gray-800 transition" data-i18n="nav_interests">興趣喜好</a>
+                <a href="#portfolio" class="px-3 py-2 rounded-xl hover:bg-brand-sage/15 dark:hover:bg-gray-800 transition" data-i18n="nav_portfolio">作品集</a>
+                <a href="#journey" class="px-3 py-2 rounded-xl hover:bg-brand-sage/15 dark:hover:bg-gray-800 transition" data-i18n="nav_journey">學習歷程</a>
+                <a href="#guestbook" class="px-3 py-2 rounded-xl hover:bg-brand-sage/15 dark:hover:bg-gray-800 transition" data-i18n="nav_guestbook">留言板</a>
+                <a href="#contact" class="px-3 py-2 rounded-xl hover:bg-brand-sage/15 dark:hover:bg-gray-800 transition" data-i18n="nav_contact">聯絡我</a>
+            </nav>
+
+            <!-- Controls: Lang Switcher & Dark Mode -->
+            <div class="flex items-center space-x-3">
+                <!-- Language Selector Pill -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-1 rounded-2xl border border-brand-sage/30 dark:border-gray-700 flex text-xs font-semibold shadow-sm">
+                    <button onclick="setLanguage('zh')" id="lang-zh" class="px-2.5 py-1 rounded-xl transition duration-200">繁中</button>
+                    <button onclick="setLanguage('en')" id="lang-en" class="px-2.5 py-1 rounded-xl transition duration-200">EN</button>
+                    <button onclick="setLanguage('th')" id="lang-th" class="px-2.5 py-1 rounded-xl transition duration-200">ไทย</button>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-2xl bg-brand-white dark:bg-brand-darkcard border border-brand-sage/30 dark:border-gray-700 flex items-center justify-center text-brand-charcoal dark:text-yellow-300 hover:scale-105 transition shadow-sm">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 rounded-2xl bg-brand-white dark:bg-brand-darkcard border border-brand-sage/30 dark:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-200">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-brand-white/95 dark:bg-brand-darkcard/95 border-b border-brand-sage/20 px-6 py-4 space-y-3 font-medium shadow-lg backdrop-blur-md">
+            <a href="#home" onclick="closeMobileMenu()" class="block py-2 border-b border-gray-100 dark:border-gray-800" data-i18n="nav_home">首頁</a>
+            <a href="#about" onclick="closeMobileMenu()" class="block py-2 border-b border-gray-100 dark:border-gray-800" data-i18n="nav_about">關於我</a>
+            <a href="#skills" onclick="closeMobileMenu()" class="block py-2 border-b border-gray-100 dark:border-gray-800" data-i18n="nav_skills">技能專長</a>
+            <a href="#interests" onclick="closeMobileMenu()" class="block py-2 border-b border-gray-100 dark:border-gray-800" data-i18n="nav_interests">興趣喜好</a>
+            <a href="#portfolio" onclick="closeMobileMenu()" class="block py-2 border-b border-gray-100 dark:border-gray-800" data-i18n="nav_portfolio">作品集</a>
+            <a href="#journey" onclick="closeMobileMenu()" class="block py-2 border-b border-gray-100 dark:border-gray-800" data-i18n="nav_journey">學習歷程</a>
+            <a href="#guestbook" onclick="closeMobileMenu()" class="block py-2 border-b border-gray-100 dark:border-gray-800" data-i18n="nav_guestbook">留言板</a>
+            <a href="#contact" onclick="closeMobileMenu()" class="block py-2 border-b border-gray-100 dark:border-gray-800" data-i18n="nav_contact">聯絡我</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 space-y-24 pb-20">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-[calc(100vh-5rem)] flex items-center justify-center pt-8 pb-12 px-4 sm:px-6">
+            <div class="max-w-4xl mx-auto text-center relative">
+                
+                <!-- Floating Decorative Shapes -->
+                <div class="absolute -top-10 -left-6 text-brand-pink text-3xl animate-float-slow">✨</div>
+                <div class="absolute top-1/3 -right-8 text-brand-sage text-3xl animate-float-slow" style="animation-delay: 1.5s;">🌸</div>
+                <div class="absolute -bottom-6 left-12 text-yellow-300 text-2xl animate-float-slow" style="animation-delay: 3s;">⭐</div>
+
+                <!-- Profile Photo Container -->
+                <div class="relative inline-block mb-8 group">
+                    <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2 bg-gradient-to-tr from-brand-sage via-brand-pink to-brand-cream shadow-xl mx-auto transform transition duration-500 group-hover:scale-105">
+                        <div class="w-full h-full rounded-full overflow-hidden border-4 border-brand-white dark:border-brand-darkbg bg-brand-white">
+                            <!-- Real Profile Image with Fallback handling -->
+                            <img src="1000046601.png" alt="李安琪 (Jiratha Kaewwong)" 
+                                 class="w-full h-full object-cover object-center" 
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x400/E8BFC3/252B29?text=Jiratha+Photo';">
+                        </div>
+                    </div>
+                    <!-- Status Badge -->
+                    <span class="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 bg-brand-white dark:bg-brand-darkcard border border-brand-sage/40 text-brand-charcoal dark:text-gray-200 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span data-i18n="hero_badge">數位多媒體系 大一</span>
+                    </span>
+                </div>
+
+                <!-- Welcome Text -->
+                <div class="inline-block px-4 py-1.5 bg-brand-pink/20 dark:bg-brand-pink/10 rounded-full text-brand-charcoal dark:text-brand-pink text-sm font-semibold mb-4">
+                    <i class="fas fa-heart text-xs mr-1 text-brand-pink"></i> <span data-i18n="hero_welcome">Hello! 歡迎來到我的創意小空間</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-3">
+                    李安琪 <span class="text-xl sm:text-3xl font-normal text-gray-500 dark:text-gray-400 block sm:inline font-sans">(Jiratha Kaewwong)</span>
+                </h1>
+                
+                <p class="text-lg sm:text-2xl font-medium text-brand-sage-dark dark:text-brand-sage mb-8" data-i18n="hero_subtitle">
+                    黎明技術學院 — 數位多媒體系學生
+                </p>
+
+                <!-- Motto Quote Card -->
+                <div class="max-w-2xl mx-auto bg-brand-white/80 dark:bg-brand-darkcard/80 backdrop-blur-sm p-6 rounded-3xl border border-brand-sage/30 dark:border-gray-700 shadow-sm mb-10 text-center relative overflow-hidden">
+                    <div class="absolute -right-4 -bottom-4 opacity-10 text-6xl font-serif text-brand-sage">“</div>
+                    <i class="fas fa-quote-left text-brand-pink text-lg mb-2 block"></i>
+                    <p class="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-200 italic" data-i18n="hero_motto">
+                        「學習新事物，不斷提升自己，創造有價值的作品。」
+                    </p>
+                </div>
+
+                <!-- Call to action button -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#guestbook" class="w-full sm:w-auto px-8 py-4 bg-brand-sage hover:bg-brand-sage-dark text-white font-bold rounded-2xl shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i class="fas fa-paper-plane"></i>
+                        <span data-i18n="btn_say_hello">Say Hello! 留言給我</span>
+                    </a>
+                    <a href="#about" class="w-full sm:w-auto px-8 py-4 bg-brand-white dark:bg-brand-darkcard hover:bg-gray-100 dark:hover:bg-gray-800 text-brand-charcoal dark:text-gray-200 border border-brand-sage/30 dark:border-gray-700 font-semibold rounded-2xl transition duration-300 flex items-center justify-center gap-2">
+                        <span data-i18n="btn_explore">探索更多</span>
+                        <i class="fas fa-arrow-down text-xs"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="max-w-6xl mx-auto px-4 sm:px-6 pt-12">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold tracking-widest text-brand-sage uppercase bg-brand-sage/10 px-3 py-1 rounded-full" data-i18n="section_about_tag">ABOUT ME</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-2 flex items-center justify-center gap-2">
+                    <span data-i18n="section_about_title">關於我</span> <span>✨</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Info Cards Grid (Left side) -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div class="bg-brand-white dark:bg-brand-darkcard p-5 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:scale-[1.02] transition">
+                        <i class="fas fa-user text-brand-pink text-xl mb-2"></i>
+                        <h4 class="text-xs text-gray-400 font-semibold uppercase" data-i18n="info_name_label">姓名</h4>
+                        <p class="font-bold text-gray-800 dark:text-gray-100 mt-1 text-sm sm:text-base">Jiratha Kaewwong</p>
+                        <p class="text-xs text-brand-sage-dark dark:text-brand-sage font-medium">李安琪</p>
+                    </div>
+
+                    <div class="bg-brand-white dark:bg-brand-darkcard p-5 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:scale-[1.02] transition">
+                        <i class="fas fa-globe text-brand-sage text-xl mb-2"></i>
+                        <h4 class="text-xs text-gray-400 font-semibold uppercase" data-i18n="info_nationality_label">國籍</h4>
+                        <p class="font-bold text-gray-800 dark:text-gray-100 mt-1 text-sm sm:text-base" data-i18n="info_nationality_val">泰國 (Thailand 🇹🇭)</p>
+                    </div>
+
+                    <div class="bg-brand-white dark:bg-brand-darkcard p-5 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:scale-[1.02] transition">
+                        <i class="fas fa-university text-amber-400 text-xl mb-2"></i>
+                        <h4 class="text-xs text-gray-400 font-semibold uppercase" data-i18n="info_uni_label">就讀學校</h4>
+                        <p class="font-bold text-gray-800 dark:text-gray-100 mt-1 text-sm sm:text-base" data-i18n="info_uni_val">黎明技術學院</p>
+                    </div>
+
+                    <div class="bg-brand-white dark:bg-brand-darkcard p-5 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:scale-[1.02] transition">
+                        <i class="fas fa-graduation-cap text-indigo-400 text-xl mb-2"></i>
+                        <h4 class="text-xs text-gray-400 font-semibold uppercase" data-i18n="info_dept_label">系所 / 年級</h4>
+                        <p class="font-bold text-gray-800 dark:text-gray-100 mt-1 text-xs sm:text-sm" data-i18n="info_dept_val">數位多媒體系 (大一)</p>
                     </div>
                 </div>
-                <!-- Status Badge -->
-                <span class="absolute bottom-1 right-1 w-7 h-7 bg-white rounded-full p-1 shadow-md border border-orange-100 flex items-center justify-center text-amber-500 font-black text-xs" title="個人照片">
-                    <i class="fa-solid fa-sparkles"></i>
-                </span>
-            </div>
 
-            <!-- Hidden File Input for Avatar Upload Simulation -->
-            <input type="file" id="photo-input" accept="image/*" class="hidden" onchange="previewUploadedPhoto(event)">
-
-            <!-- Name and Title -->
-            <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-gray-900 mb-2">
-                李文彤
-            </h1>
-            <p class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-100 to-amber-100 text-orange-900 font-bold text-xs sm:text-sm mb-6 border border-orange-200/60">
-                <i class="fa-solid fa-graduation-cap text-orange-500"></i>
-                黎明技術學院 數位多媒體系
-            </p>
-
-            <!-- One-Line Bio Quote -->
-            <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-4 sm:p-5 rounded-2xl border border-orange-100 text-stone-800 text-sm sm:text-base font-semibold leading-relaxed">
-                「 總而言之，我喜歡簡單、平靜的生活，也熱愛旅行。」
-            </div>
-        </div>
-
-        <!-- 2. SKILLS & INTERESTS (精簡亮麗標籤卡) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            
-            <!-- Professional Skill Pill -->
-            <div class="vibrant-card rounded-2xl p-6 flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white flex items-center justify-center text-xl font-bold shadow-md shadow-orange-500/20 shrink-0">
-                    <i class="fa-solid fa-camera-retro"></i>
-                </div>
-                <div>
-                    <span class="text-[11px] font-extrabold uppercase tracking-wider text-orange-600">專長技能</span>
-                    <h3 class="text-lg font-black text-gray-900 mt-0.5">攝影與傳播</h3>
-                </div>
-            </div>
-
-            <!-- Personal Interests Pill -->
-            <div class="vibrant-card rounded-2xl p-6 flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-orange-400 text-white flex items-center justify-center text-xl font-bold shadow-md shadow-rose-500/20 shrink-0">
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-                <div>
-                    <span class="text-[11px] font-extrabold uppercase tracking-wider text-rose-600">個人興趣</span>
-                    <h3 class="text-lg font-black text-gray-900 mt-0.5 flex items-center gap-2">
-                        <span>聽音樂</span>
-                        <span class="text-gray-300">‧</span>
-                        <span>睡覺</span>
+                <!-- Story Text Card (Right side) -->
+                <div class="lg:col-span-7 bg-brand-white dark:bg-brand-darkcard p-8 rounded-4xl border border-brand-sage/20 dark:border-gray-700 shadow-sm relative overflow-hidden">
+                    <div class="w-16 h-16 rounded-full bg-brand-pink/20 absolute -right-4 -top-4 rounded-full pointer-events-none"></div>
+                    
+                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <span data-i18n="about_story_title">你好！我是來自泰國的李安琪</span>
+                        <span class="text-xl">👋</span>
                     </h3>
+
+                    <div class="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base" data-i18n="about_story_content">
+                        <p>我是一名來自泰國的留學生，目前在台灣的黎明技術學院攻讀數位多媒體系一年級。</p>
+                        <p>我對數位媒體設計、視覺藝術與 AI 創作充滿熱情。來到台灣學習不僅讓我能夠探索最新的多媒體技術，也讓我體驗到了不一樣的文化與生活方式。</p>
+                        <p>我的目標是不斷學習新技術、提升中文能力，並創造出有意義且具有溫度的創意作品。歡迎與我交流！</p>
+                    </div>
+
+                    <!-- Highlight Tags -->
+                    <div class="mt-6 flex flex-wrap gap-2 pt-4 border-t border-gray-100 dark:border-gray-800">
+                        <span class="text-xs font-semibold px-3 py-1 bg-brand-ivory dark:bg-gray-800 text-brand-sage-dark dark:text-brand-sage rounded-full"># 數位多媒體</span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-brand-ivory dark:bg-gray-800 text-brand-pink rounded-full"># 台灣留學</span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-brand-ivory dark:bg-gray-800 text-amber-600 rounded-full"># 創意AI</span>
+                        <span class="text-xs font-semibold px-3 py-1 bg-brand-ivory dark:bg-gray-800 text-blue-500 rounded-full"># 平面設計學習中</span>
+                    </div>
                 </div>
             </div>
+        </section>
 
-        </div>
+        <!-- SKILLS & ABILITIES -->
+        <section id="skills" class="max-w-6xl mx-auto px-4 sm:px-6 pt-12">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold tracking-widest text-brand-sage uppercase bg-brand-sage/10 px-3 py-1 rounded-full" data-i18n="section_skills_tag">SKILLS & CAPABILITIES</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-2" data-i18n="section_skills_title">技能與專長 🎨</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" data-i18n="skills_subtitle">保持誠實與謙虛，每天都在持續學習進步中</p>
+            </div>
 
-        <!-- 3. CONTACT DIRECTORY (一鍵互動聯絡) -->
-        <div class="vibrant-card rounded-3xl p-6 sm:p-8">
-            <h2 class="text-xs font-black uppercase tracking-widest text-center text-stone-400 mb-5">
-                Quick Contact ‧ 聯繫方式
-            </h2>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                <!-- Email Button -->
-                <button onclick="copyInfo('bd1151012@mail.lit.edu.tw.tw', 'Email')" 
-                        class="group p-3.5 rounded-2xl bg-amber-50/80 hover:bg-amber-100/80 border border-amber-200/80 text-amber-950 font-bold text-xs flex flex-col items-center justify-center gap-1.5 transition active:scale-95">
-                    <i class="fa-solid fa-envelope text-lg text-amber-600 group-hover:scale-110 transition"></i>
-                    <span>複製 Email</span>
-                </button>
+                <!-- Skill Card 1 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-pink/20 flex items-center justify-center text-brand-pink text-xl">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-pink bg-brand-pink/10 px-2.5 py-1 rounded-full" data-i18n="skill_tag_learning">積極學習</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1" data-i18n="skill_1_name">Digital Media Design 數位媒體設計</h3>
+                    <p class="text-xs text-gray-400 mb-4" data-i18n="skill_1_desc">基礎色彩學、版面構圖與視覺設計原理</p>
+                    <div class="w-full bg-gray-100 dark:bg-gray-700 h-2.5 rounded-full overflow-hidden">
+                        <div class="bg-brand-pink h-full rounded-full transition-all duration-1000" style="width: 75%;"></div>
+                    </div>
+                </div>
 
-                <!-- Line ID Button -->
-                <button onclick="copyInfo('@muay_nannaphat', 'Line ID')" 
-                        class="group p-3.5 rounded-2xl bg-emerald-50/80 hover:bg-emerald-100/80 border border-emerald-200/80 text-emerald-950 font-bold text-xs flex flex-col items-center justify-center gap-1.5 transition active:scale-95">
-                    <i class="fa-brands fa-line text-lg text-emerald-600 group-hover:scale-110 transition"></i>
-                    <span>複製 Line ID</span>
-                </button>
+                <!-- Skill Card 2 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-sage/20 flex items-center justify-center text-brand-sage-dark text-xl">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-sage-dark bg-brand-sage/10 px-2.5 py-1 rounded-full" data-i18n="skill_tag_exploring">熱情探索</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1" data-i18n="skill_2_name">AI Tools & Creative AI 創意 AI 工具</h3>
+                    <p class="text-xs text-gray-400 mb-4" data-i18n="skill_2_desc">生成式 AI 輔助創作、提示詞運用與圖像生成</p>
+                    <div class="w-full bg-gray-100 dark:bg-gray-700 h-2.5 rounded-full overflow-hidden">
+                        <div class="bg-brand-sage h-full rounded-full transition-all duration-1000" style="width: 70%;"></div>
+                    </div>
+                </div>
 
-                <!-- Instagram Button -->
-                <a href="https://instagram.com/bl4qur_" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   class="group p-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-amber-500 text-white font-bold text-xs flex flex-col items-center justify-center gap-1.5 shadow-md shadow-rose-500/20 hover:opacity-95 transition active:scale-95">
-                    <i class="fa-brands fa-instagram text-lg group-hover:scale-110 transition"></i>
-                    <span>造訪 Instagram</span>
-                </a>
+                <!-- Skill Card 3 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center text-amber-500 text-xl">
+                            <i class="fas fa-vector-square"></i>
+                        </div>
+                        <span class="text-xs font-bold text-amber-500 bg-amber-50 dark:bg-amber-900/20 px-2.5 py-1 rounded-full" data-i18n="skill_tag_in_progress">上手中</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1" data-i18n="skill_3_name">Adobe Illustrator</h3>
+                    <p class="text-xs text-gray-400 mb-4" data-i18n="skill_3_desc">向量繪圖、標誌設計與插畫基本工具</p>
+                    <div class="w-full bg-gray-100 dark:bg-gray-700 h-2.5 rounded-full overflow-hidden">
+                        <div class="bg-amber-400 h-full rounded-full transition-all duration-1000" style="width: 55%;"></div>
+                    </div>
+                </div>
+
+                <!-- Skill Card 4 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:-translate-y-1 transition duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-500 text-xl">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <span class="text-xs font-bold text-blue-500 bg-blue-50 dark:bg-blue-900/20 px-2.5 py-1 rounded-full" data-i18n="skill_tag_native">母語 Native</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1" data-i18n="skill_4_name">Thai Language 泰語</h3>
+                    <p class="text-xs text-gray-400 mb-4" data-i18n="skill_4_desc">聽說讀寫流利母語</p>
+                    <div class="w-full bg-gray-100 dark:bg-gray-700 h-2.5 rounded-full overflow-hidden">
+                        <div class="bg-blue-400 h-full rounded-full transition-all duration-1000" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <!-- Skill Card 5 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:-translate-y-1 transition duration-300 md:col-span-2 lg:col-span-2">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-500 text-xl">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 px-2.5 py-1 rounded-full" data-i18n="skill_tag_tocfl">TOCFL A2 備考中</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1" data-i18n="skill_5_name">Chinese Language 中文學習</h3>
+                    <p class="text-xs text-gray-400 mb-4" data-i18n="skill_5_desc">積極增進中文日常會話、專業課堂溝通與讀寫能力</p>
+                    <div class="w-full bg-gray-100 dark:bg-gray-700 h-2.5 rounded-full overflow-hidden">
+                        <div class="bg-emerald-400 h-full rounded-full transition-all duration-1000" style="width: 45%;"></div>
+                    </div>
+                </div>
 
             </div>
-        </div>
+        </section>
+
+        <!-- INTERESTS & INSPIRATION -->
+        <section id="interests" class="max-w-6xl mx-auto px-4 sm:px-6 pt-12">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold tracking-widest text-brand-pink uppercase bg-brand-pink/10 px-3 py-1 rounded-full" data-i18n="section_interests_tag">INTERESTS & LIFE</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-2" data-i18n="section_interests_title">興趣與靈感來源 🧸</h2>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                <!-- Interest Item 1 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm text-center hover:scale-105 hover:shadow-md transition duration-300">
+                    <div class="text-4xl mb-3">🎧</div>
+                    <h3 class="font-bold text-sm sm:text-base" data-i18n="interest_1_title">聆聽音樂</h3>
+                    <p class="text-xs text-gray-400 mt-1" data-i18n="interest_1_desc">放鬆心情與尋找靈感</p>
+                </div>
+                <!-- Interest Item 2 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm text-center hover:scale-105 hover:shadow-md transition duration-300">
+                    <div class="text-4xl mb-3">📚</div>
+                    <h3 class="font-bold text-sm sm:text-base" data-i18n="interest_2_title">閱讀書籍</h3>
+                    <p class="text-xs text-gray-400 mt-1" data-i18n="interest_2_desc">探索新知與豐富視野</p>
+                </div>
+                <!-- Interest Item 3 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm text-center hover:scale-105 hover:shadow-md transition duration-300">
+                    <div class="text-4xl mb-3">🌿</div>
+                    <h3 class="font-bold text-sm sm:text-base" data-i18n="interest_3_title">探索美景</h3>
+                    <p class="text-xs text-gray-400 mt-1" data-i18n="interest_3_desc">走出戶外感受台灣之美</p>
+                </div>
+                <!-- Interest Item 4 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm text-center hover:scale-105 hover:shadow-md transition duration-300">
+                    <div class="text-4xl mb-3">✨</div>
+                    <h3 class="font-bold text-sm sm:text-base" data-i18n="interest_4_title">可愛事物</h3>
+                    <p class="text-xs text-gray-400 mt-1" data-i18n="interest_4_desc">搜集生活中的溫暖微光</p>
+                </div>
+                <!-- Interest Item 5 -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm text-center hover:scale-105 hover:shadow-md transition duration-300 col-span-2 sm:col-span-1">
+                    <div class="text-4xl mb-3">🎨</div>
+                    <h3 class="font-bold text-sm sm:text-base" data-i18n="interest_5_title">數位創意</h3>
+                    <p class="text-xs text-gray-400 mt-1" data-i18n="interest_5_desc">科技與藝術的完美結合</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO / PROJECTS -->
+        <section id="portfolio" class="max-w-6xl mx-auto px-4 sm:px-6 pt-12">
+            <div class="text-center mb-10">
+                <span class="text-xs font-bold tracking-widest text-brand-sage uppercase bg-brand-sage/10 px-3 py-1 rounded-full" data-i18n="section_portfolio_tag">MY CREATIONS</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-2" data-i18n="section_portfolio_title">作品集 Portfolio 🖼️</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2" data-i18n="portfolio_subtitle">記錄我在大學課程與個人創作中的點點滴滴</p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button onclick="filterProjects('all')" class="project-tab active-tab px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-brand-sage text-white shadow-sm transition">All 全部</button>
+                <button onclick="filterProjects('graphic')" class="project-tab px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-brand-white dark:bg-brand-darkcard border border-brand-sage/30 text-gray-600 dark:text-gray-300 hover:bg-brand-sage/10 transition">Graphic Design 平面設計</button>
+                <button onclick="filterProjects('art')" class="project-tab px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-brand-white dark:bg-brand-darkcard border border-brand-sage/30 text-gray-600 dark:text-gray-300 hover:bg-brand-sage/10 transition">Digital Art 數位插畫</button>
+                <button onclick="filterProjects('ai')" class="project-tab px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-brand-white dark:bg-brand-darkcard border border-brand-sage/30 text-gray-600 dark:text-gray-300 hover:bg-brand-sage/10 transition">AI Creations AI創作</button>
+                <button onclick="filterProjects('video')" class="project-tab px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-brand-white dark:bg-brand-darkcard border border-brand-sage/30 text-gray-600 dark:text-gray-300 hover:bg-brand-sage/10 transition">Multimedia 影音多媒體</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                
+                <!-- Project Placeholder Card 1 -->
+                <div class="project-item graphic bg-brand-white dark:bg-brand-darkcard rounded-3xl overflow-hidden border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:-translate-y-1.5 transition duration-300 flex flex-col">
+                    <div class="h-48 bg-gradient-to-br from-brand-pink/30 to-brand-cream relative flex items-center justify-center overflow-hidden">
+                        <i class="fas fa-compass-drafting text-4xl text-brand-pink/60"></i>
+                        <span class="absolute top-3 right-3 bg-brand-white/80 dark:bg-brand-darkcard/80 backdrop-blur-xs text-[10px] font-bold px-2.5 py-1 rounded-full text-brand-charcoal dark:text-gray-200">Graphic</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg mb-1" data-i18n="proj_1_title">課堂平面構成作業</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mb-3" data-i18n="proj_1_desc">探索版面平衡與色彩對比的視覺練習。</p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs text-brand-sage-dark font-medium">
+                            <span><i class="far fa-clock mr-1"></i> Coming Soon</span>
+                            <span class="text-gray-400">Illustrator</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Placeholder Card 2 -->
+                <div class="project-item ai bg-brand-white dark:bg-brand-darkcard rounded-3xl overflow-hidden border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:-translate-y-1.5 transition duration-300 flex flex-col">
+                    <div class="h-48 bg-gradient-to-br from-brand-sage/30 to-brand-ivory relative flex items-center justify-center overflow-hidden">
+                        <i class="fas fa-wand-magic-sparkles text-4xl text-brand-sage/60"></i>
+                        <span class="absolute top-3 right-3 bg-brand-white/80 dark:bg-brand-darkcard/80 backdrop-blur-xs text-[10px] font-bold px-2.5 py-1 rounded-full text-brand-charcoal dark:text-gray-200">AI Art</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg mb-1" data-i18n="proj_2_title">AI 奇幻視覺實驗</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mb-3" data-i18n="proj_2_desc">運用生成式 AI 創作與概念藝術發想。</p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs text-brand-sage-dark font-medium">
+                            <span><i class="far fa-clock mr-1"></i> Work in Progress</span>
+                            <span class="text-gray-400">Midjourney / Firefly</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Placeholder Card 3 -->
+                <div class="project-item art video bg-brand-white dark:bg-brand-darkcard rounded-3xl overflow-hidden border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:-translate-y-1.5 transition duration-300 flex flex-col">
+                    <div class="h-48 bg-gradient-to-br from-amber-100 to-brand-pink/20 relative flex items-center justify-center overflow-hidden">
+                        <i class="fas fa-film text-4xl text-amber-300"></i>
+                        <span class="absolute top-3 right-3 bg-brand-white/80 dark:bg-brand-darkcard/80 backdrop-blur-xs text-[10px] font-bold px-2.5 py-1 rounded-full text-brand-charcoal dark:text-gray-200">Multimedia</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg mb-1" data-i18n="proj_3_title">多媒體短片專題</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mb-3" data-i18n="proj_3_desc">結合音效與動畫的短影片剪輯創作。</p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-xs text-brand-sage-dark font-medium">
+                            <span><i class="far fa-clock mr-1"></i> Coming Soon</span>
+                            <span class="text-gray-400">Premiere / After Effects</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Upload Helper Notice -->
+            <div class="mt-8 bg-brand-sage/10 dark:bg-brand-darkcard border border-dashed border-brand-sage/40 p-4 rounded-2xl text-center text-xs text-gray-500 dark:text-gray-400">
+                <i class="fas fa-info-circle text-brand-sage mr-1"></i>
+                <span data-i18n="portfolio_upload_hint">作品正在用心整理製作中，即將陸續更新上架！</span>
+            </div>
+        </section>
+
+        <!-- LEARNING JOURNEY TIMELINE -->
+        <section id="journey" class="max-w-4xl mx-auto px-4 sm:px-6 pt-12">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold tracking-widest text-brand-sage uppercase bg-brand-sage/10 px-3 py-1 rounded-full" data-i18n="section_journey_tag">MY ROADMAP</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-2" data-i18n="section_journey_title">學習歷程 Journey 🚀</h2>
+            </div>
+
+            <!-- Timeline Vertical -->
+            <div class="relative border-l-2 border-brand-sage/40 dark:border-gray-700 ml-4 sm:ml-32 space-y-8">
+                
+                <!-- Timeline Step 1 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-brand-pink text-white flex items-center justify-center text-xs font-bold shadow-md">
+                        🇹🇭
+                    </div>
+                    <div class="bg-brand-white dark:bg-brand-darkcard p-5 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:shadow-md transition">
+                        <span class="text-xs font-bold text-brand-pink">2026 年 — 入學黎明技術學院</span>
+                        <h3 class="font-bold text-base sm:text-lg mt-0.5" data-i18n="journey_1_title">啟程：台灣數位多媒體系學習之旅</h3>
+                        <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2" data-i18n="journey_1_desc">正式展開在台灣的留學生涯，入學黎明技術學院數位多媒體系大一，學習各項多媒體理論與實務。</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Step 2 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-brand-sage text-white flex items-center justify-center text-xs font-bold shadow-md">
+                        📜
+                    </div>
+                    <div class="bg-brand-white dark:bg-brand-darkcard p-5 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:shadow-md transition">
+                        <span class="text-xs font-bold text-brand-sage-dark">進行中 In Progress</span>
+                        <h3 class="font-bold text-base sm:text-lg mt-0.5" data-i18n="journey_2_title">中文強化與 TOCFL A2 檢定準備</h3>
+                        <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2" data-i18n="journey_2_desc">積極適應全中文授課環境，提升聽說讀寫實力，目標順利通過華語文能力測驗 TOCFL A2。</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Step 3 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-amber-400 text-white flex items-center justify-center text-xs font-bold shadow-md">
+                        ✍️
+                    </div>
+                    <div class="bg-brand-white dark:bg-brand-darkcard p-5 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:shadow-md transition">
+                        <span class="text-xs font-bold text-amber-500">技能養成 Skills</span>
+                        <h3 class="font-bold text-base sm:text-lg mt-0.5" data-i18n="journey_3_title">精進 Adobe Illustrator 向量繪圖</h3>
+                        <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2" data-i18n="journey_3_desc">熟悉 Illustrator 工具操作，練習 Icon 設計、人物插畫繪製與平面標誌設計。</p>
+                    </div>
+                </div>
+
+                <!-- Timeline Step 4 -->
+                <div class="relative pl-8 sm:pl-10 group">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-purple-400 text-white flex items-center justify-center text-xs font-bold shadow-md">
+                        🤖
+                    </div>
+                    <div class="bg-brand-white dark:bg-brand-darkcard p-5 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm hover:shadow-md transition">
+                        <span class="text-xs font-bold text-purple-400">創新科技 Future</span>
+                        <h3 class="font-bold text-base sm:text-lg mt-0.5" data-i18n="journey_4_title">探索 AI 輔助創作與多媒體應用</h3>
+                        <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2" data-i18n="journey_4_desc">學習結合 AI 生成工具與個人創意思維，探索效率更高且具獨特美感的工作流程。</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- GUESTBOOK SECTION -->
+        <section id="guestbook" class="max-w-3xl mx-auto px-4 sm:px-6 pt-12">
+            <div class="bg-gradient-to-b from-brand-pink-light to-brand-white dark:from-brand-darkcard dark:to-brand-darkbg p-8 sm:p-10 rounded-4xl border border-brand-pink/40 shadow-sm text-center relative overflow-hidden">
+                
+                <!-- Small Decorative Stars / Flowers -->
+                <div class="absolute top-4 left-6 text-brand-pink text-xl opacity-60">✨</div>
+                <div class="absolute bottom-4 right-6 text-brand-sage text-xl opacity-60">🌸</div>
+
+                <span class="text-xs font-bold tracking-widest text-brand-pink uppercase bg-brand-pink/20 px-3 py-1 rounded-full" data-i18n="section_guestbook_tag">GUESTBOOK</span>
+                
+                <h2 class="text-2xl sm:text-4xl font-bold mt-3 mb-2" data-i18n="section_guestbook_title">
+                    留言給我 ♡
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-8" data-i18n="guestbook_subtitle">
+                    感謝你來到我的網站！非常歡迎給我留下溫暖的鼓勵或問候。
+                </p>
+
+                <!-- Form -->
+                <form id="guestbook-form" onsubmit="handleGuestbookSubmit(event)" class="space-y-4 text-left max-w-xl mx-auto">
+                    <div>
+                        <label for="gb-name" class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1" data-i18n="form_label_name">你的稱呼 / Name *</label>
+                        <input type="text" id="gb-name" required placeholder="ex. Alex" class="w-full px-4 py-3 rounded-2xl border border-brand-sage/30 dark:border-gray-700 bg-brand-white dark:bg-brand-darkbg focus:outline-none focus:ring-2 focus:ring-brand-pink transition text-sm">
+                    </div>
+
+                    <div>
+                        <label for="gb-email" class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1" data-i18n="form_label_email">電子郵件 / Email (選填 Optional)</label>
+                        <input type="email" id="gb-email" placeholder="yourname@example.com" class="w-full px-4 py-3 rounded-2xl border border-brand-sage/30 dark:border-gray-700 bg-brand-white dark:bg-brand-darkbg focus:outline-none focus:ring-2 focus:ring-brand-pink transition text-sm">
+                    </div>
+
+                    <div>
+                        <label for="gb-message" class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1" data-i18n="form_label_msg">想說的話 / Message *</label>
+                        <textarea id="gb-message" rows="4" required placeholder="Write your greetings here..." class="w-full px-4 py-3 rounded-2xl border border-brand-sage/30 dark:border-gray-700 bg-brand-white dark:bg-brand-darkbg focus:outline-none focus:ring-2 focus:ring-brand-pink transition text-sm resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-brand-pink hover:bg-rose-300 text-white font-bold rounded-2xl shadow-md transition duration-300 transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fas fa-heart text-sm"></i>
+                        <span data-i18n="btn_send_msg">發送留言 Send Message</span>
+                    </button>
+                </form>
+
+                <p class="text-[11px] text-gray-400 mt-4 italic" data-i18n="guestbook_privacy_note">
+                    * 點擊發送將為您開啟 Email 應用程式傳送郵件給安琪，不會公開您的個人隱私資料。
+                </p>
+            </div>
+        </section>
+
+        <!-- CONTACT ME SECTION -->
+        <section id="contact" class="max-w-5xl mx-auto px-4 sm:px-6 pt-12">
+            <div class="text-center mb-10">
+                <span class="text-xs font-bold tracking-widest text-brand-sage uppercase bg-brand-sage/10 px-3 py-1 rounded-full" data-i18n="section_contact_tag">GET IN TOUCH</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-2" data-i18n="section_contact_title">聯絡方式 Contact 📬</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Email Contact Card -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-2xl bg-rose-100 dark:bg-rose-900/30 text-brand-pink flex items-center justify-center text-2xl mb-4">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-1">學校 Email</h3>
+                    <p class="text-xs text-gray-400 mb-4 break-all">bd1151018@venus.lit.ac.tw</p>
+                    <a href="mailto:bd1151018@venus.lit.ac.tw" class="mt-auto text-xs font-bold px-4 py-2 bg-brand-ivory dark:bg-gray-800 text-brand-charcoal dark:text-gray-200 rounded-xl hover:bg-brand-pink hover:text-white transition">
+                        <i class="fas fa-paper-plane mr-1"></i> 寄信給我
+                    </a>
+                </div>
+
+                <!-- LINE Contact Card -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-500 flex items-center justify-center text-2xl mb-4">
+                        <i class="fab fa-line"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-1">LINE ID</h3>
+                    <p class="text-xs text-gray-400 mb-4">onson.onson</p>
+                    <button onclick="copyToClipboard('onson.onson', 'LINE ID')" class="mt-auto text-xs font-bold px-4 py-2 bg-brand-ivory dark:bg-gray-800 text-brand-charcoal dark:text-gray-200 rounded-xl hover:bg-emerald-500 hover:text-white transition">
+                        <i class="fas fa-copy mr-1"></i> 複製 LINE ID
+                    </button>
+                </div>
+
+                <!-- Instagram Contact Card -->
+                <div class="bg-brand-white dark:bg-brand-darkcard p-6 rounded-3xl border border-brand-sage/20 dark:border-gray-700 shadow-sm text-center flex flex-col items-center">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/30 text-purple-500 flex items-center justify-center text-2xl mb-4">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-1">Instagram</h3>
+                    <p class="text-xs text-gray-400 mb-4">@onsou.o</p>
+                    <a href="https://instagram.com/onsou.o" target="_blank" rel="noopener" class="mt-auto text-xs font-bold px-4 py-2 bg-brand-ivory dark:bg-gray-800 text-brand-charcoal dark:text-gray-200 rounded-xl hover:bg-purple-500 hover:text-white transition">
+                        <i class="fas fa-external-link-alt mr-1"></i> 前往 Instagram
+                    </a>
+                </div>
+
+            </div>
+        </section>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="py-6 text-center text-xs text-stone-400 font-semibold">
-        &copy; <span id="year"></span> 李文彤 (Li Wen-Tong) ‧ 黎明技術學院數位多媒體系
+    <footer class="bg-brand-white dark:bg-brand-darkcard border-t border-brand-sage/20 dark:border-gray-800 py-8 text-center text-xs text-gray-500 dark:text-gray-400 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <p class="font-medium">© 2026 李安琪 (Jiratha Kaewwong) — All rights reserved.</p>
+                <p class="text-[11px] text-gray-400 mt-0.5">黎明技術學院 數位多媒體系 學習作品集網站</p>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-pink inline-block"></span>
+                <span>Made with ♡ & Creative Passion</span>
+            </div>
+        </div>
     </footer>
 
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white text-xs font-bold py-3 px-6 rounded-full shadow-2xl flex items-center gap-2 border border-stone-800">
-        <i class="fa-solid fa-circle-check text-amber-400 text-sm"></i>
-        <span id="toast-text">已複製！</span>
+    <!-- Back to Top Button -->
+    <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-2xl bg-brand-sage text-white shadow-lg flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-brand-sage-dark">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Toast Notification Modal for Feedback -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-brand-charcoal text-white text-xs font-semibold px-5 py-3 rounded-2xl shadow-xl flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300">
+        <i id="toast-icon" class="fas fa-check-circle text-brand-pink"></i>
+        <span id="toast-message">訊息已成功複製！</span>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+        // ----------------------------------------------------
+        // TRILINGUAL TRANSLATION DICTIONARY
+        // ----------------------------------------------------
+        const translations = {
+            zh: {
+                nav_home: "首頁",
+                nav_about: "關於我",
+                nav_skills: "技能專長",
+                nav_interests: "興趣喜好",
+                nav_portfolio: "作品集",
+                nav_journey: "學習歷程",
+                nav_guestbook: "留言板",
+                nav_contact: "聯絡我",
+                
+                hero_badge: "數位多媒體系 大一",
+                hero_welcome: "Hello! 歡迎來到我的創意小空間",
+                hero_subtitle: "黎明技術學院 — 數位多媒體系學生",
+                hero_motto: "「學習新事物，不斷提升自己，創造有價值的作品。」",
+                btn_say_hello: "Say Hello! 留言給我",
+                btn_explore: "探索更多",
 
-        // 複製到剪貼簿功能
-        function copyInfo(text, label) {
-            const temp = document.createElement('input');
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
-            try {
-                document.execCommand('copy');
-                showToast(`已成功複製 ${label}：${text}`);
-            } catch (err) {
-                showToast('複製失敗，請手動複製');
+                section_about_tag: "ABOUT ME",
+                section_about_title: "關於我",
+                info_name_label: "姓名",
+                info_nationality_label: "國籍",
+                info_nationality_val: "泰國 (Thailand 🇹🇭)",
+                info_uni_label: "就讀學校",
+                info_uni_val: "黎明技術學院",
+                info_dept_label: "系所 / 年級",
+                info_dept_val: "數位多媒體系 (大一)",
+                about_story_title: "你好！我是來自泰國的李安琪",
+                about_story_content: "<p>我是一名來自泰國的留學生，目前在台灣的黎明技術學院攻讀數位多媒體系一年級。</p><p>我對數位媒體設計、視覺藝術與 AI 創作充滿熱情。來到台灣學習不僅讓我能夠探索最新的多媒體技術，也讓我體驗到了不一樣的文化與生活方式。</p><p>我的目標是不斷學習新技術、提升中文能力，並創造出有意義且具有溫度的創意作品。歡迎與我交流！</p>",
+
+                section_skills_tag: "SKILLS & CAPABILITIES",
+                section_skills_title: "技能與專長 🎨",
+                skills_subtitle: "保持誠實與謙虛，每天都在持續學習進步中",
+                skill_tag_learning: "積極學習",
+                skill_tag_exploring: "熱情探索",
+                skill_tag_in_progress: "上手中",
+                skill_tag_native: "母語 Native",
+                skill_tag_tocfl: "TOCFL A2 備考中",
+                skill_1_name: "Digital Media Design 數位媒體設計",
+                skill_1_desc: "基礎色彩學、版面構圖與視覺設計原理",
+                skill_2_name: "AI Tools & Creative AI 創意 AI 工具",
+                skill_2_desc: "生成式 AI 輔助創作、提示詞運用與圖像生成",
+                skill_3_name: "Adobe Illustrator",
+                skill_3_desc: "向量繪圖、標誌設計與插畫基本工具",
+                skill_4_name: "Thai Language 泰語",
+                skill_4_desc: "聽說讀寫流利母語",
+                skill_5_name: "Chinese Language 中文學習",
+                skill_5_desc: "積極增進中文日常會話、專業課堂溝通與讀寫能力",
+
+                section_interests_tag: "INTERESTS & LIFE",
+                section_interests_title: "興趣與靈感來源 🧸",
+                interest_1_title: "聆聽音樂",
+                interest_1_desc: "放鬆心情與尋找靈感",
+                interest_2_title: "閱讀書籍",
+                interest_2_desc: "探索新知與豐富視野",
+                interest_3_title: "探索美景",
+                interest_3_desc: "走出戶外感受台灣之美",
+                interest_4_title: "可愛事物",
+                interest_4_desc: "搜集生活中的溫暖微光",
+                interest_5_title: "數位創意",
+                interest_5_desc: "科技與藝術的完美結合",
+
+                section_portfolio_tag: "MY CREATIONS",
+                section_portfolio_title: "作品集 Portfolio 🖼️",
+                portfolio_subtitle: "記錄我在大學課程與個人創作中的點點滴滴",
+                proj_1_title: "課堂平面構成作業",
+                proj_1_desc: "探索版面平衡與色彩對比的視覺練習。",
+                proj_2_title: "AI 奇幻視覺實驗",
+                proj_2_desc: "運用生成式 AI 創作與概念藝術發想。",
+                proj_3_title: "多媒體短片專題",
+                proj_3_desc: "結合音效與動畫的短影片剪輯創作。",
+                portfolio_upload_hint: "作品正在用心整理製作中，即將陸續更新上架！",
+
+                section_journey_tag: "MY ROADMAP",
+                section_journey_title: "學習歷程 Journey 🚀",
+                journey_1_title: "啟程：台灣數位多媒體系學習之旅",
+                journey_1_desc: "正式展開在台灣的留學生涯，入學黎明技術學院數位多媒體系大一，學習各項多媒體理論與實務。",
+                journey_2_title: "中文強化與 TOCFL A2 檢定準備",
+                journey_2_desc: "積極適應全中文授課環境，提升聽說讀寫實力，目標順利通過華語文能力測驗 TOCFL A2。",
+                journey_3_title: "精進 Adobe Illustrator 向量繪圖",
+                journey_3_desc: "熟悉 Illustrator 工具操作，練習 Icon 設計、人物插畫繪製與平面標誌設計。",
+                journey_4_title: "探索 AI 輔助創作與多媒體應用",
+                journey_4_desc: "學習結合 AI 生成工具與個人創意思維，探索效率更高且具獨特美感的工作流程。",
+
+                section_guestbook_tag: "GUESTBOOK",
+                section_guestbook_title: "留言給我 ♡",
+                guestbook_subtitle: "感謝你來到我的網站！非常歡迎給我留下溫暖的鼓勵或問候。",
+                form_label_name: "你的稱呼 / Name *",
+                form_label_email: "電子郵件 / Email (選填 Optional)",
+                form_label_msg: "想說的話 / Message *",
+                btn_send_msg: "發送留言 Send Message",
+                guestbook_privacy_note: "* 點擊發送將為您開啟 Email 應用程式傳送郵件給安琪，不會公開您的個人隱私資料。",
+
+                section_contact_tag: "GET IN TOUCH",
+                section_contact_title: "聯絡方式 Contact 📬"
+            },
+            en: {
+                nav_home: "Home",
+                nav_about: "About Me",
+                nav_skills: "Skills",
+                nav_interests: "Interests",
+                nav_portfolio: "Portfolio",
+                nav_journey: "Journey",
+                nav_guestbook: "Guestbook",
+                nav_contact: "Contact",
+                
+                hero_badge: "Digital Multimedia · 1st Year",
+                hero_welcome: "Hello! Welcome to my little creative space.",
+                hero_subtitle: "Lee-Ming Institute of Technology — Digital Multimedia Student",
+                hero_motto: "\"Learn new things, improve myself, and create meaningful work.\"",
+                btn_say_hello: "Say Hello! Leave Message",
+                btn_explore: "Explore More",
+
+                section_about_tag: "ABOUT ME",
+                section_about_title: "About Me",
+                info_name_label: "Full Name",
+                info_nationality_label: "Nationality",
+                info_nationality_val: "Thailand 🇹🇭",
+                info_uni_label: "University",
+                info_uni_val: "Lee-Ming Institute of Tech",
+                info_dept_label: "Dept / Year",
+                info_dept_val: "Digital Multimedia (Freshman)",
+                about_story_title: "Hello! I am Jiratha Kaewwong",
+                about_story_content: "<p>I am an international student from Thailand, currently in my first year studying Digital Multimedia at Lee-Ming Institute of Technology in Taiwan.</p><p>I have a strong passion for digital media design, visual arts, and creative AI tools. Studying in Taiwan allows me to explore cutting-edge multimedia technologies while experiencing an enriching cultural environment.</p><p>My goal is to continuously master new skills, improve my Chinese fluency, and create meaningful visual works. Feel free to connect with me!</p>",
+
+                section_skills_tag: "SKILLS & CAPABILITIES",
+                section_skills_title: "Skills & Abilities 🎨",
+                skills_subtitle: "Staying humble and learning something new every single day.",
+                skill_tag_learning: "Active Learning",
+                skill_tag_exploring: "Exploring",
+                skill_tag_in_progress: "In Progress",
+                skill_tag_native: "Native",
+                skill_tag_tocfl: "Preparing TOCFL A2",
+                skill_1_name: "Digital Media Design",
+                skill_1_desc: "Color theory, layout composition & visual design principles",
+                skill_2_name: "AI Tools & Creative AI",
+                skill_2_desc: "Generative AI workflow, prompt crafting & image creation",
+                skill_3_name: "Adobe Illustrator",
+                skill_3_desc: "Vector illustration, logo design & essential graphic tools",
+                skill_4_name: "Thai Language",
+                skill_4_desc: "Fluent native speaker in speaking, reading & writing",
+                skill_5_name: "Chinese Language",
+                skill_5_desc: "Actively developing daily conversation and academic communication",
+
+                section_interests_tag: "INTERESTS & LIFE",
+                section_interests_title: "Interests & Inspiration 🧸",
+                interest_1_title: "Listening to Music",
+                interest_1_desc: "Relaxing and seeking creative sparks",
+                interest_2_title: "Reading Books",
+                interest_2_desc: "Expanding knowledge & horizons",
+                interest_3_title: "Exploring Places",
+                interest_3_desc: "Enjoying the beauty of Taiwan",
+                interest_4_title: "Cute Things",
+                interest_4_desc: "Collecting sweet sparks of everyday life",
+                interest_5_title: "Digital Creativity",
+                interest_5_desc: "Where technology meets art",
+
+                section_portfolio_tag: "MY CREATIONS",
+                section_portfolio_title: "My Portfolio 🖼️",
+                portfolio_subtitle: "Documenting my academic coursework and personal creative projects.",
+                proj_1_title: "Graphic Composition Practice",
+                proj_1_desc: "Visual exercises on layout balance and color harmony.",
+                proj_2_title: "AI Visual Concept Experiment",
+                proj_2_desc: "Generative AI artwork and fantasy concept explorations.",
+                proj_3_title: "Multimedia Short Video",
+                proj_3_desc: "Video editing and motion project combining audio effects.",
+                portfolio_upload_hint: "New assignments and artworks will be uploaded continuously!",
+
+                section_journey_tag: "MY ROADMAP",
+                section_journey_title: "Learning Journey 🚀",
+                journey_1_title: "Arrival: Digital Multimedia Studies in Taiwan",
+                journey_1_desc: "Began my journey abroad as a freshman in Digital Multimedia at Lee-Ming Institute of Technology.",
+                journey_2_title: "Chinese Intensive & TOCFL A2 Prep",
+                journey_2_desc: "Adapting to Chinese-instruction courses and actively aiming to pass TOCFL A2 certification.",
+                journey_3_title: "Mastering Adobe Illustrator",
+                journey_3_desc: "Practicing vector tools, character illustration, and graphic layout design.",
+                journey_4_title: "Exploring Creative AI Workflows",
+                journey_4_desc: "Integrating generative AI technology into human creative design processes.",
+
+                section_guestbook_tag: "GUESTBOOK",
+                section_guestbook_title: "Leave Me a Little Message ♡",
+                guestbook_subtitle: "Thank you for visiting! Feel free to leave a friendly greeting or note.",
+                form_label_name: "Your Name *",
+                form_label_email: "Email Address (Optional)",
+                form_label_msg: "Message *",
+                btn_send_msg: "Send Message",
+                guestbook_privacy_note: "* Clicking send will open your mail app to compose an email to Jiratha. Your information will remain private.",
+
+                section_contact_tag: "GET IN TOUCH",
+                section_contact_title: "Contact Me 📬"
+            },
+            th: {
+                nav_home: "หน้าแรก",
+                nav_about: "เกี่ยวกับฉัน",
+                nav_skills: "ทักษะความรู้",
+                nav_interests: "ความสนใจ",
+                nav_portfolio: "ผลงาน",
+                nav_journey: "เส้นทางการเรียน",
+                nav_guestbook: "สมุดเยี่ยม",
+                nav_contact: "ติดต่อฉัน",
+                
+                hero_badge: "มัลติมีเดีย ปี 1",
+                hero_welcome: "สวัสดีค่ะ! ยินดีต้อนรับสู่พื้นที่สร้างสรรค์ของฉัน",
+                hero_subtitle: "มหาวิทยาลัยเทคโนโลยีหลีหมิง — นักศึกษาสาขาดิจิทัลมัลติมีเดีย",
+                hero_motto: "「เรียนรู้สิ่งใหม่ พัฒนาตนเอง และสร้างสรรค์ผลงานที่มีคุณค่า」",
+                btn_say_hello: "Say Hello! ทักทายฉัน",
+                btn_explore: "สำรวจเพิ่มเติม",
+
+                section_about_tag: "ABOUT ME",
+                section_about_title: "เกี่ยวกับฉัน",
+                info_name_label: "ชื่อ-นามสกุล",
+                info_nationality_label: "สัญชาติ",
+                info_nationality_val: "ไทย (Thailand 🇹🇭)",
+                info_uni_label: "สถาบันการศึกษา",
+                info_uni_val: "Lee-Ming Institute of Technology",
+                info_dept_label: "สาขา / ชั้นปี",
+                info_dept_val: "ดิจิทัลมัลติมีเดีย (ปี 1)",
+                about_story_title: "สวัสดีค่ะ! ฉันชื่อ Jiratha Kaewwong (李安琪)",
+                about_story_content: "<p>ฉันเป็นนักศึกษาไทยที่กำลังศึกษาอยู่ชั้นปีที่ 1 สาขาดิจิทัลมัลติมีเดีย ณ มหาวิทยาลัยเทคโนโลยีหลีหมิง ประเทศไต้หวัน</p><p>ฉันมีความสนใจอย่างยิ่งในด้านการออกแบบสื่อดิจิทัล ศิลปะภาพ และเครื่องมือ AI สร้างสรรค์ การได้มาศึกษาที่ไต้หวันช่วยให้ฉันได้เรียนรู้เทคโนโลยีใหม่ๆ และสัมผัสวัฒนธรรมที่หลากหลาย</p><p>เป้าหมายของฉันคือการพัฒนาทักษะใหม่ๆ ฝึกฝนภาษาจีนอย่างต่อเนื่อง และสร้างสรรค์ผลงานที่มีความหมาย ยินดีที่ได้รู้จักทุกคนค่ะ!</p>",
+
+                section_skills_tag: "SKILLS & CAPABILITIES",
+                section_skills_title: "ทักษะและความสามารถ 🎨",
+                skills_subtitle: "เรียนรู้อย่างถ่อมตนและพัฒนาตัวเองในทุกๆ วัน",
+                skill_tag_learning: "กำลังเรียนรู้",
+                skill_tag_exploring: "สนใจอย่างยิ่ง",
+                skill_tag_in_progress: "กำลังฝึกฝน",
+                skill_tag_native: "ภาษาแม่ Native",
+                skill_tag_tocfl: "เตรียมสอบ TOCFL A2",
+                skill_1_name: "Digital Media Design ออกแบบสื่อดิจิทัล",
+                skill_1_desc: "ทฤษฎีสี การจัดวางเลย์เอาต์ และหลักการออกแบบภาพ",
+                skill_2_name: "AI Tools & Creative AI เครื่องมือ AI",
+                skill_2_desc: "การสร้างสรรค์ด้วย Generative AI และการใช้ Prompt",
+                skill_3_name: "Adobe Illustrator",
+                skill_3_desc: "กราฟิกเวกเตอร์ การออกแบบโลโก้ และวาดภาพประกอบ",
+                skill_4_name: "Thai Language ภาษาไทย",
+                skill_4_desc: "ภาษาแม่ สามารถฟัง พูด อ่าน เขียน ได้อย่างคล่องแคล่ว",
+                skill_5_name: "Chinese Language เรียนรู้ภาษาจีน",
+                skill_5_desc: "มุ่งมั่นพัฒนาภาษาจีนสำหรับการสื่อสารและการเรียน",
+
+                section_interests_tag: "INTERESTS & LIFE",
+                section_interests_title: "ความสนใจและแรงบันดาลใจ 🧸",
+                interest_1_title: "ฟังเพลง",
+                interest_1_desc: "ผ่อนคลายและค้นหาแรงบันดาลใจ",
+                interest_2_title: "อ่านหนังสือ",
+                interest_2_desc: "เปิดโลกทัศน์และเพิ่มพูนความรู้",
+                interest_3_title: "ท่องเที่ยวธรรมชาติ",
+                interest_3_desc: "สัมผัสความสวยงามของไต้หวัน",
+                interest_4_title: "สิ่งน่ารักๆ",
+                interest_4_desc: "สะสมความสุขเล็กๆ ในชีวิตประจำวัน",
+                interest_5_title: "ความคิดสร้างสรรค์ดิจิทัล",
+                interest_5_desc: "การผสมผสานระหว่างเทคโนโลยีและศิลปะ",
+
+                section_portfolio_tag: "MY CREATIONS",
+                section_portfolio_title: "ผลงานของฉัน Portfolio 🖼️",
+                portfolio_subtitle: "รวบรวมชิ้นงานจากการเรียนและงานส่วนตัว",
+                proj_1_title: "การออกแบบภาพ平面構成",
+                proj_1_desc: "แบบฝึกหัดการจัดวางองค์ประกอบภาพและสีสัน",
+                proj_2_title: "การทดลองศิลปะด้วย AI",
+                proj_2_desc: "การสร้างสรรค์ผลงานแนวคิดด้วย AI",
+                proj_3_title: "วิดีโอมัลติมีเดียสั้น",
+                proj_3_desc: "การตัดต่อวิดีโอพร้อมเอฟเฟกต์เสียง",
+                portfolio_upload_hint: "กำลังจัดเตรียมผลงานใหม่ๆ และจะอัปเดตเร็วๆ นี้!",
+
+                section_journey_tag: "MY ROADMAP",
+                section_journey_title: "เส้นทางการเรียนรู้ Journey 🚀",
+                journey_1_title: "จุดเริ่มต้น: ศึกษาต่อด้านดิจิทัลมัลติมีเดียในไต้หวัน",
+                journey_1_desc: "เริ่มชีวิตนักศึกษาต่างชาติชั้นปีที่ 1 สาขาดิจิทัลมัลติมีเดีย ณ Lee-Ming Institute of Technology",
+                journey_2_title: "เรียนภาษาจีน & เตรียมสอบ TOCFL A2",
+                journey_2_desc: "ปรับตัวกับการเรียนภาษาจีนและตั้งเป้าหมายสอบผ่านระดับ TOCFL A2",
+                journey_3_title: "ฝึกฝน Adobe Illustrator",
+                journey_3_desc: "เรียนรู้เครื่องมือเวกเตอร์ การวาดภาพตัวละคร และการออกแบบโลโก้",
+                journey_4_title: "ประยุกต์ใช้ AI ในงานสร้างสรรค์",
+                journey_4_desc: "ผสมผสานเทคโนโลยี AI เข้ากับความคิดสร้างสรรค์เพื่อเพิ่มประสิทธิภาพในการทำงาน",
+
+                section_guestbook_tag: "GUESTBOOK",
+                section_guestbook_title: "ฝากข้อความทักทายถึงฉัน ♡",
+                guestbook_subtitle: "ขอบคุณที่แวะมาเยี่ยมชมเว็บไซต์! สามารถทักทายหรือส่งกำลังใจให้ฉันได้ที่นี่ค่ะ",
+                form_label_name: "ชื่อของคุณ / Name *",
+                form_label_email: "อีเมล / Email (ไม่จำเป็น)",
+                form_label_msg: "ข้อความ / Message *",
+                btn_send_msg: "ส่งข้อความ Send Message",
+                guestbook_privacy_note: "* เมื่อกดส่ง ระบบจะเปิดแอปอีเมลเพื่อส่งข้อความถึง Jiratha โดยข้อมูลของคุณจะถูกเก็บเป็นความลับ",
+
+                section_contact_tag: "GET IN TOUCH",
+                section_contact_title: "ช่องทางติดต่อ Contact 📬"
             }
-            document.body.removeChild(temp);
+        };
+
+        let currentLang = localStorage.getItem('user_lang') || 'zh';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('user_lang', lang);
+
+            // Update Language Selector Pill Styling
+            ['zh', 'en', 'th'].forEach(l => {
+                const btn = document.getElementById(`lang-${l}`);
+                if (l === lang) {
+                    btn.className = "px-2.5 py-1 rounded-xl bg-brand-sage text-white font-bold transition duration-200 shadow-xs";
+                } else {
+                    btn.className = "px-2.5 py-1 rounded-xl text-gray-500 hover:text-brand-charcoal dark:hover:text-gray-200 transition duration-200";
+                }
+            });
+
+            // Replace Text in DOM elements with data-i18n attributes
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    if (key === 'about_story_content') {
+                        elem.innerHTML = translations[lang][key];
+                    } else {
+                        elem.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // Adjust document html lang tag
+            document.documentElement.lang = lang === 'zh' ? 'zh-TW' : (lang === 'th' ? 'th' : 'en');
         }
 
-        // 提示彈窗機制
+        // ----------------------------------------------------
+        // DARK MODE TOGGLE
+        // ----------------------------------------------------
+        function initTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            }
+        }
+
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        // ----------------------------------------------------
+        // MOBILE MENU LOGIC
+        // ----------------------------------------------------
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // ----------------------------------------------------
+        // PORTFOLIO FILTERING
+        // ----------------------------------------------------
+        function filterProjects(category) {
+            const items = document.querySelectorAll('.project-item');
+            const buttons = document.querySelectorAll('.project-tab');
+
+            buttons.forEach(btn => {
+                btn.className = "project-tab px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-brand-white dark:bg-brand-darkcard border border-brand-sage/30 text-gray-600 dark:text-gray-300 hover:bg-brand-sage/10 transition";
+            });
+
+            event.currentTarget.className = "project-tab active-tab px-4 py-2 rounded-2xl text-xs sm:text-sm font-semibold bg-brand-sage text-white shadow-sm transition";
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // ----------------------------------------------------
+        // GUESTBOOK FORM HANDLER (Opens Mail Client)
+        // ----------------------------------------------------
+        function handleGuestbookSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('gb-name').value;
+            const email = document.getElementById('gb-email').value || 'Not provided';
+            const message = document.getElementById('gb-message').value;
+
+            const subject = encodeURIComponent(`[Website Greeting] From ${name}`);
+            const body = encodeURIComponent(
+                `Hello Jiratha,\n\nYou received a new greeting message from your website portfolio:\n\n` +
+                `Name: ${name}\n` +
+                `Email: ${email}\n\n` +
+                `Message:\n${message}\n\n` +
+                `------------------------------------\nSent via Portfolio Website Guestbook`
+            );
+
+            // Construct mailto URL
+            const mailtoUrl = `mailto:bd1151018@venus.lit.ac.tw?subject=${subject}&body=${body}`;
+
+            // Open mail app
+            window.location.href = mailtoUrl;
+
+            // Display clear feedback
+            showToast("✨ Opening your email app to send message!");
+            
+            // Reset form
+            document.getElementById('guestbook-form').reset();
+        }
+
+        // ----------------------------------------------------
+        // CLIPBOARD COPY HELPER
+        // ----------------------------------------------------
+        function copyToClipboard(text, label) {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+
+            showToast(`📋 Copied ${label}: ${text}`);
+        }
+
         function showToast(msg) {
             const toast = document.getElementById('toast');
-            document.getElementById('toast-text').textContent = msg;
-            toast.classList.add('show');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = msg;
+
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+
             setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2600);
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
         }
 
-        // 觸發替換個人照片
-        function triggerPhotoChange() {
-            document.getElementById('photo-input').click();
-        }
+        // ----------------------------------------------------
+        // BACK TO TOP & SCROLL LISTENERS
+        // ----------------------------------------------------
+        const backToTopBtn = document.getElementById('back-to-top');
 
-        // 預覽上傳的照片
-        function previewUploadedPhoto(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('user-avatar').src = e.target.result;
-                    showToast('已成功更新您的個人照片！');
-                }
-                reader.readAsDataURL(file);
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('opacity-100');
+            } else {
+                backToTopBtn.classList.remove('opacity-100');
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
             }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ----------------------------------------------------
+        // CURSOR TRAIL EFFECT (SUBTLE)
+        // ----------------------------------------------------
+        const cursorDot = document.getElementById('cursor-dot');
+        window.addEventListener('mousemove', (e) => {
+            if (cursorDot) {
+                cursorDot.style.opacity = '0.7';
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+            }
+        });
+
+        // ----------------------------------------------------
+        // ON INITIAL LOAD
+        // ----------------------------------------------------
+        window.onload = function() {
+            initTheme();
+            setLanguage(currentLang);
         }
     </script>
 </body>
